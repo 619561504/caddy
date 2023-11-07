@@ -1,0 +1,82 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "apps": {
+    "http": {
+      "servers": {
+        "srv0": {
+          "listen": [
+            ":18080"
+          ],
+          "tls_connection_policies": [
+            {
+              "match": {
+                "sni": [
+                  "101.42.16.62",
+                  "localhost"
+                ]
+              }
+            }
+          ],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "subroute",
+                  "routes": [
+                    {
+                      "handle": [
+                        {
+                          "dial_timeout": 30000000000,
+                          "handler": "forward_proxy",
+                          "ip_transparent": true,
+                          "ip_net": "172.20.99.0/24",
+                          "mark": 123,
+                          "table": 100
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "tls": {
+      "certificates": {
+        "automate": [
+          "localhost",
+          "101.42.16.62"
+        ]
+      },
+      "automation": {
+        "policies": [
+          {
+            "subjects": [
+              "localhost",
+              "101.42.16.62"
+            ],
+            "issuers": [
+              {
+                "module": "internal"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import (
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/encode/gzip"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/encode/zstd"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/fileserver"
+	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/forwardproxy"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/headers"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/map"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/proxyprotocol"
@@ -19,5 +20,6 @@ import (
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/reverseproxy/forwardauth"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/rewrite"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/templates"
+	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/tproxy"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/tracing"
 )

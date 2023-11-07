@@ -1,0 +1,67 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "admin": {
+    "listen": ":2019"
+  },
+  "apps": {
+    "tls": {
+      "certificates": {
+        "automate": [
+          "localhost"
+        ]
+      },
+      "automation": {
+        "policies": [
+          {
+            "subjects": [
+              "localhost"
+            ],
+            "issuers": [
+              {
+                "module": "internal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "http": {
+      "http_port": 12016,
+      "servers": {
+        "https_server": {
+          "listen": [
+            ":18080"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "host": [
+                    ""
+                  ]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "forward_proxy"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

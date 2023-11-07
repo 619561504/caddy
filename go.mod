@@ -8,6 +8,8 @@ require (
 	github.com/alecthomas/chroma/v2 v2.9.1
 	github.com/aryann/difflib v0.0.0-20210328193216-ff5ff6dc229b
 	github.com/caddyserver/certmagic v0.19.2
+	github.com/caddyserver/forwardproxy v0.0.0-20211013034647-8c6ef2bd4a8f
+	github.com/coreos/go-iptables v0.7.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/google/cel-go v0.15.1
@@ -25,6 +27,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.4
 	github.com/tailscale/tscert v0.0.0-20230806124524-28a91b69a046
+	github.com/vishvananda/netlink v1.1.0
 	github.com/yuin/goldmark v1.5.6
 	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.45.0
@@ -60,6 +63,7 @@ require (
 	github.com/quic-go/qpack v0.4.0 // indirect
 	github.com/quic-go/qtls-go1-20 v0.4.1 // indirect
 	github.com/smallstep/go-attestation v0.4.4-0.20230627102604-cf579e53cbd2 // indirect
+	github.com/vishvananda/netns v0.0.0-20211101163701-50045581ed74 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/zeebo/blake3 v0.2.3 // indirect
 	go.opentelemetry.io/contrib/propagators/aws v1.17.0 // indirect
@@ -141,7 +145,7 @@ require (
 	go.step.sm/linkedca v0.20.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/mod v0.11.0 // indirect
-	golang.org/x/sys v0.13.0
+	golang.org/x/sys v0.14.0
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/tools v0.10.0 // indirect
 	google.golang.org/grpc v1.59.0 // indirect

@@ -109,7 +109,6 @@ nextChoice:
 				}
 			}
 		}
-
 		// this certificate at least meets the policy's requirements,
 		// but we still have to check expiration and compatibility
 		viable = append(viable, cert)

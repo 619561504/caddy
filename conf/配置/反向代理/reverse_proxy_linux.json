@@ -1,0 +1,56 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "admin": {
+    "listen": ":2020"
+  },
+  "apps": {
+    "http": {
+      "http_port": 12017,
+      "servers": {
+        "https_server": {
+          "listen": [
+            ":2017"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "host": [
+                    "localhost",
+                    "127.0.0.1",
+                    "192.168.0.115"
+                  ]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "reverse_proxy",
+                  "transport": {
+                    "protocol": "http"
+                  },
+                  "upstreams": [
+                    {
+                      "dial": "127.0.0.1:2016"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

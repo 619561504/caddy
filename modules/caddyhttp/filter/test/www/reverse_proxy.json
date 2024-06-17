@@ -1,0 +1,65 @@
+{
+  "apps": {
+    "http": {
+      "servers": {
+        "srv0": {
+          "listen": [
+            ":2015"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "host": [
+                    "localhost"
+                  ]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "subroute",
+                  "routes": [
+                    {
+                      "handle": [
+                        {
+                          "handler": "reverse_proxy",
+                          "headers": {
+                            "request": {
+                              "delete": [
+                                "Accept-Encoding"
+                              ],
+                              "set": {
+                                "Host": [
+                                  "raw.githubusercontent.com"
+                                ]
+                              }
+                            }
+                          },
+                          "transport": {
+                            "protocol": "http",
+                            "tls": {}
+                          },
+                          "upstreams": [
+                            {
+                              "dial": "raw.githubusercontent.com:443"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "terminal": true
+            }
+          ],
+          "automatic_https": {
+            "skip": [
+              "localhost"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

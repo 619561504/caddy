@@ -358,6 +358,7 @@ func (app *App) Validate() error {
 
 // Start runs the app. It finishes automatic HTTPS if enabled,
 // including management of certificates.
+// self 启动http、http2、http3服务（端口复用）
 func (app *App) Start() error {
 	// get a logger compatible with http.Server
 	serverLogger, err := zap.NewStdLogAt(app.logger.Named("stdlib"), zap.DebugLevel)

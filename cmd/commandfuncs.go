@@ -21,6 +21,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/google/gops/agent"
 	"io"
 	"io/fs"
 	"log"
@@ -28,9 +29,11 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"os/signal"
 	"runtime"
 	"runtime/debug"
 	"strings"
+	"syscall"
 
 	"github.com/aryann/difflib"
 	"go.uber.org/zap"
@@ -279,6 +282,33 @@ func cmdRun(fl Flags) (int, error) {
 			caddy.Log().Warn("$HOME environment variable is empty - please fix; some assets might be stored in ./caddy")
 		}
 	}
+
+	// FIXME! 启动 pprof
+
+	go func() {
+		signals := make(chan os.Signal, 1)
+		signal.Notify(signals, syscall.SIGUSR1, syscall.SIGUSR2, syscall.SIGTERM)
+		isStart := false
+
+		for {
+			v := <-signals
+			switch v {
+			case syscall.SIGUSR2:
+				if !isStart {
+					if err := agent.Listen(agent.Options{}); err != nil {
+						caddy.Log().Error("agent.Listen err: %v", zap.Error(err))
+					} else {
+						isStart = true
+					}
+				} else {
+					agent.Close()
+					isStart = false
+				}
+			default:
+				caddy.Log().Info("Got Unregistered signal", zap.String("signal", v.String()))
+			}
+		}
+	}()
 
 	select {}
 }

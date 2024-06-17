@@ -1,0 +1,47 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "admin": {
+    "listen": ":2019"
+  },
+  "apps": {
+    "http": {
+      "servers": {
+        "echo_server": {
+          "listen": [
+            ":2016"
+          ],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "filter",
+                  "search_pattern": "(.*)",
+                  "replacement": "PGh0bWw+PGJvZHk+5pu/5o2i5ZCO77yaezF9PC9ib2R5PjwvaHRtbD4=",
+                  "content_type": ".*",
+                  "max_size": 2097152,
+                  "path": ".*"
+                },
+                {
+                  "handler": "static_response",
+                  "body": "客户端IP：{http.request.remote}\n"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

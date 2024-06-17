@@ -103,7 +103,7 @@ func (cp ConnectionPolicies) TLSConfig(_ caddy.Context) *tls.Config {
 		MinVersion: tls.VersionTLS12,
 		GetConfigForClient: func(hello *tls.ClientHelloInfo) (*tls.Config, error) {
 			// filter policies by SNI first, if possible, to speed things up
-			// when there may be lots of policies
+			// when there may bCe lots of policies
 			possiblePolicies := cp
 			if indexedPolicies, ok := indexedBySNI[hello.ServerName]; ok {
 				possiblePolicies = indexedPolicies
@@ -204,6 +204,7 @@ func (p *ConnectionPolicy) buildStandardTLSConfig(ctx caddy.Context) error {
 	// (such as slices), we should ensure that they start empty
 	// so the user-provided config can fill them in; then we will
 	// fill in a default config at the end if they are still unset
+	// FIXME! 证书匹配逻辑
 	cfg := &tls.Config{
 		NextProtos: p.ALPN,
 		GetCertificate: func(hello *tls.ClientHelloInfo) (*tls.Certificate, error) {

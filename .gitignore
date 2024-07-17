@@ -13,6 +13,8 @@ cmd/caddy/caddy
 cmd/caddy/caddy.exe
 cmd/caddy/tmp/*.exe
 cmd/caddy/.env
+cmd/caddy/caddy_linux
+cmd/caddy/caddy_linux2
 
 # mac specific
 .DS_Store

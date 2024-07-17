@@ -1,0 +1,45 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "admin": {
+    "listen": ":2019"
+  },
+  "apps": {
+    "layer4": {
+      "servers": {
+        "example": {
+          "listen": [
+            "udp/127.0.0.1:5000"
+          ],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "proxy",
+                  "upstreams": [
+                    {
+                      "dial": [
+                        "udp/127.0.0.1:19808"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

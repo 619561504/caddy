@@ -13,7 +13,9 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/google/cel-go v0.15.1
+	github.com/google/gops v0.3.28
 	github.com/google/uuid v1.3.1
+	github.com/icholy/replace v0.6.0
 	github.com/klauspost/compress v1.17.0
 	github.com/klauspost/cpuid/v2 v2.2.5
 	github.com/mastercactapus/proxyprotocol v0.0.4
@@ -27,6 +29,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.4
 	github.com/tailscale/tscert v0.0.0-20230806124524-28a91b69a046
+	github.com/things-go/go-socks5 v0.0.4
 	github.com/vishvananda/netlink v1.1.0
 	github.com/yuin/goldmark v1.5.6
 	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc
@@ -41,6 +44,7 @@ require (
 	golang.org/x/net v0.17.0
 	golang.org/x/sync v0.4.0
 	golang.org/x/term v0.13.0
+	golang.org/x/time v0.3.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20231016165738-49dd2c1f3d0b
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gopkg.in/yaml.v3 v3.0.1
@@ -146,7 +150,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/mod v0.11.0 // indirect
 	golang.org/x/sys v0.14.0
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/text v0.13.0
 	golang.org/x/tools v0.10.0 // indirect
 	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect

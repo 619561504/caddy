@@ -1,0 +1,50 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "admin": {
+    "listen": ":2020"
+  },
+  "apps": {
+    "layer4": {
+      "servers": {
+        "example": {
+          "listen": [
+            ":2017"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "tls": {}
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "proxy",
+                  "upstreams": [
+                    {
+                      "dial": [
+                        "localhost:2016"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

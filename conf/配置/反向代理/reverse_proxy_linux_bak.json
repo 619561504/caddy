@@ -1,0 +1,100 @@
+{
+  "logging": {
+    "logs": {
+      "http.handlers": {
+        "level": "DEBUG",
+        "writer": {
+          "output": "stdout"
+        },
+        "encoder": {
+          "format": "console"
+        }
+      }
+    }
+  },
+  "admin": {
+    "listen": ":2019"
+  },
+  "apps": {
+    "tls": {
+      "certificates": {
+        "load_files": [
+          {
+            "certificate": "/data/ioa/certs/_wildcard.baidu.com.pem",
+            "key": "/data/ioa/certs/_wildcard.baidu.com-key.pem"
+          },
+          {
+            "certificate": "/data/ioa/certs/_wildcard.qq.com.pem",
+            "key": "/data/ioa/certs/_wildcard.qq.com-key.pem"
+          }
+        ]
+      }
+    },
+    "http": {
+      "http_port": 12016,
+      "servers": {
+        "https_server": {
+          "listen": [
+            ":2016"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "host": [
+                    "*.baidu.com",
+                    "*.qq.com"
+                  ]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "ngn_smart_web",
+                  "scheme": "https"
+                },
+                {
+                  "handler": "reverse_proxy",
+                  "transport": {
+                    "protocol": "http",
+                    "tls": {}
+                  },
+                  "upstreams": [
+                    {
+                      "dial": "{ngn.smart.web.target.host}:{ngn.smart.web.target.port}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "http_server": {
+          "listen": [
+            ":2017"
+          ],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "ngn_smart_web",
+                  "scheme": "http"
+                },
+                {
+                  "handler": "reverse_proxy",
+                  "transport": {
+                    "protocol": "http"
+                  },
+                  "upstreams": [
+                    {
+                      "dial": "{ngn.smart.web.target.host}:{ngn.smart.web.target.port}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
